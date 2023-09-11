@@ -1,4 +1,4 @@
-import { computed, readonly, getCurrentInstance } from 'vue';
+import { computed, getCurrentInstance } from 'vue';
 function runCB(cb, store, namespace, prop) {
     if (cb.length === 3) { // choose which signature to pass to cb function
         return cb(store, namespace, prop);
@@ -25,7 +25,7 @@ function useFromObject(store, namespace, props, cb) {
 export function computedGetter(store, prop) {
     return computed(() => {
         const val = store.getters[prop];
-        return typeof val === 'object' ? readonly(val) : val;
+        return val;
     });
 }
 export function getMutation(store, mutation) {

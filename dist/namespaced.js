@@ -1,10 +1,10 @@
-import { computed, readonly } from 'vue';
+import { computed } from 'vue';
 import { computedGetter, getAction, getMutation, getStoreFromInstance, useMapping } from './util';
 function computedState(store, namespace, prop) {
     let module = namespace.split('/').reduce((module, key) => module[key], store.state);
     return computed(() => {
         const val = module[prop];
-        return typeof val === 'object' ? readonly(val) : val;
+        return val;
     });
 }
 export function useNamespacedState(storeOrNamespace, namespaceOrMap, map) {

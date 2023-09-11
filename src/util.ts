@@ -1,4 +1,4 @@
-import {computed, readonly, getCurrentInstance, ComputedRef, DeepReadonly} from 'vue';
+import {computed, getCurrentInstance, ComputedRef, DeepReadonly} from 'vue';
 import {Store} from 'vuex/types';
 
 declare type OmitFirstArg<F, TReturn> =
@@ -72,7 +72,7 @@ function useFromObject<T>(store: any, namespace: string | null, props: KnownKeys
 export function computedGetter<T = any>(store: any, prop: string) {
 	return computed<T>(() => {
 		const val = store.getters[prop];
-		return typeof val === 'object' ? readonly(val) : val
+		return val
 	});
 }
 

@@ -1,4 +1,4 @@
-import {computed, readonly} from 'vue';
+import {computed} from 'vue';
 import {computedGetter, getAction, getMutation, getStoreFromInstance, useMapping, KnownKeys, ComputedRefTypes, ExtractTypes, ExtractGetterTypes} from './util';
 import {Store} from 'vuex';
 
@@ -8,7 +8,7 @@ function computedState(store: any, namespace: string, prop: string) {
 	let module = namespace.split('/').reduce((module, key) => module[key], store.state)
 	return computed(() => {
 		const val = module[prop];
-		return typeof val === 'object' ? readonly(val) : val
+		return val
 	});
 }
 
