@@ -1,11 +1,11 @@
 import {Store} from 'vuex/types';
-import {computed, readonly} from 'vue';
+import {computed} from 'vue';
 import {computedGetter, getAction, getMutation, getStoreFromInstance, useMapping, ExtractGetterTypes, ExtractTypes, KnownKeys, ComputedRefTypes} from './util';
 
 function computedState(store: any, prop: string) {
 	return computed(() => {
 		const val = store.state[prop];
-		return typeof val === 'object' ? readonly(val) : val
+		return val
 	});
 }
 
