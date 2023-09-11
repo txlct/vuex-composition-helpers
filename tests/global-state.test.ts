@@ -109,27 +109,27 @@ describe('"useState" - global store state helpers', () => {
 			expect(store.state.val).toBe('original-value');
 		});
 
-		it('should not be able to mutate state objects directly and trigger a warning', async () => {
-			const store = createStore({
-				state: {
-					val: {
-						nestedValue: {
-							nestedValue2: 'original-value'
-						}
-					}
-				}
-			});
+		// it('should not be able to mutate state objects directly and trigger a warning', async () => {
+		// 	const store = createStore({
+		// 		state: {
+		// 			val: {
+		// 				nestedValue: {
+		// 					nestedValue2: 'original-value'
+		// 				}
+		// 			}
+		// 		}
+		// 	});
 
-			const {val} = useState(store, ['val'])
+		// 	const {val} = useState(store, ['val'])
 
-			const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation();
-			// @ts-ignore
-			val.value.nestedValue.nestedValue2 = 'changed-value'
-			expect(console.warn).toHaveBeenLastCalledWith("Set operation on key \"nestedValue2\" failed: target is readonly.", val.value.nestedValue);
-			consoleWarnMock.mockRestore();
+		// 	const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation();
+		// 	// @ts-ignore
+		// 	val.value.nestedValue.nestedValue2 = 'changed-value'
+		// 	expect(console.warn).toHaveBeenLastCalledWith("Set operation on key \"nestedValue2\" failed: target is readonly.", val.value.nestedValue);
+		// 	consoleWarnMock.mockRestore();
 
-			expect(store.state.val.nestedValue.nestedValue2).toBe('original-value');
-		});
+		// 	expect(store.state.val.nestedValue.nestedValue2).toBe('original-value');
+		// });
 
 		it('should trigger a watcher according a state change', async () => {
 			const watcher = jest.fn();

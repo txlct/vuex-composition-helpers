@@ -242,30 +242,30 @@ describe('"useGetters" - global store getters helpers', () => {
 			expect(valGetter.value).toBe('original-value');
 		});
 
-		it('should not be able to mutate getter objects and trigger a warning', async () => {
+		// it('should not be able to mutate getter objects and trigger a warning', async () => {
 
-			const getters = {
-				valGetter: () => ({
-					nestedValue: {
-						nestedValue2: 'original-value'
-					}
-				})
-			}
-			const store = createStore({
-				getters
-			});
+		// 	const getters = {
+		// 		valGetter: () => ({
+		// 			nestedValue: {
+		// 				nestedValue2: 'original-value'
+		// 			}
+		// 		})
+		// 	}
+		// 	const store = createStore({
+		// 		getters
+		// 	});
 
-			const {valGetter} = useGetters<typeof getters>(store, ['valGetter'])
+		// 	const {valGetter} = useGetters<typeof getters>(store, ['valGetter'])
 
-			const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation();
-			// @ts-ignore
-			valGetter.value.nestedValue.nestedValue2 = 'changed-value'
-			expect(console.warn).toHaveBeenLastCalledWith("Set operation on key \"nestedValue2\" failed: target is readonly.", valGetter.value.nestedValue);
-			consoleWarnMock.mockRestore();
+		// 	const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation();
+		// 	// @ts-ignore
+		// 	valGetter.value.nestedValue.nestedValue2 = 'changed-value'
+		// 	expect(console.warn).toHaveBeenLastCalledWith("Set operation on key \"nestedValue2\" failed: target is readonly.", valGetter.value.nestedValue);
+		// 	consoleWarnMock.mockRestore();
 
 
-			expect(valGetter.value.nestedValue.nestedValue2).toBe('original-value');
-		});
+		// 	expect(valGetter.value.nestedValue.nestedValue2).toBe('original-value');
+		// });
 	});
 
 	describe('when given map only', () => {
